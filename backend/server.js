@@ -16,6 +16,9 @@ app.use(express.json())
 
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+// Expõe o JSON do dashboard em http://localhost:3001/data/dados_dashboard.json
+app.use('/data', express.static(path.join(__dirname, '../data')));
+
 app.use("/api",authRouts);
 
 app.get('/',(req,res) => {
