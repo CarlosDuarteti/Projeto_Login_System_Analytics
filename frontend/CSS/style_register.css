@@ -1,0 +1,365 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Vampiro One", system-ui;
+}
+
+body{
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #0f2027, #020617);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+}
+
+/* ====================================== ÁREA PRINCIPAL DO CADASTRO ====================================== */
+
+.register-wrapper{
+    display: flex;
+    gap: 70px;
+    align-items: center;
+}
+
+/* ====================================== INFORMAÇÕES AO LADO DO FORMULÁRIO ====================================== */
+.register_info{
+    max-width: 320px;
+}
+
+.register_info h1{
+    font-size: 38px;
+    margin-bottom: 12px;
+    color: #f9fafb;
+}
+
+.register_info p{
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: #cbd5f5;
+}
+
+.register_info span{
+    display: block;
+    margin-bottom: 6px;
+    color: #94a3b8;
+}
+
+.register_info a{
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register_info a:hover{
+    text-decoration: underline;
+}
+
+/* ====================================== CARD DO FORMULÁRIO ====================================== */
+.register-card{
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(14px);
+    padding: 40px;
+    border-radius: 18px;
+    width: 360px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.85);
+}
+
+/* ====================================== CAMPOS DO FORMULÁRIO ====================================== */
+.input-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.input-group label{
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #60a5fa;
+}
+
+.input-group input{
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #1e293b;
+    background-color: #020617;
+    color: #f1f5f9;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input::placeholder{
+    color: #64748b;
+}
+
+.input-group input:focus{
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+}
+
+/* ====================================== BOTÃO PRINCIPAL DO FORMULÁRIO ====================================== */
+button{
+    margin-top: 24px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    color: #020617;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.5);
+}
+
+/*======================================
+=BOTÃO PARA ALTERAR O TEMA DA PÁGINA =
+======================================*/
+.theme-toggle-btn{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 20px;
+    right: 80px;
+    margin-top: 0;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.theme-toggle-btn:hover{
+    transform: scale(1,1);
+    background: rgba(255,255,255,0.3);
+}
+
+/*======================================
+=THEMA CLARO =
+======================================*/
+body.light {
+    background: linear-gradient(135deg,#e0f2fe,#bae6fd,#7dd3fc);
+}
+
+body.light .login-container {
+background: #ffffff;
+box-shadow: 0 20px 40px rgba(0, 114, 255, 0.15);
+}
+
+/*======================================
+=ALTERANDO OS TEXTOS =
+======================================*/
+body.light .register-card h1 {
+color: #0f172a;
+}
+
+body.light .register-card p {
+color: #475569;
+}
+
+/*======================================
+=ALTERANDO OS CAMPOS =
+======================================*/
+body.light .input-group label {
+color: #334155;
+}
+
+body.light .input-group input {
+background: #f1f5f9;
+color: #0f172a;
+border: 1px solid #cbd5e1;
+}
+
+body.light .input-group input::placeholder {
+color: #94a3b8;
+}
+
+/*======================================
+=AJUSTANDO BOTAO DO TEMA CLARO =
+======================================*/
+body.light .theme-toggle-btn {
+background-color: rgba(15, 23, 42, 0.1);
+border: 1px solid rgba(15, 23, 42, 0.2);
+color: #0f172a;
+}
+
+body.light .footer {
+color: #64748b;
+}
+body.light .footer a {
+color: #0072ff;
+}
+
+/* ======================================
+   FONTE DO TEMA CLARO
+====================================== */
+
+body.light * {
+    font-family: "Poppins", sans-serif;
+}
+
+/* ====================================== MODAL DE NOTIFICAÇÃO ====================================== */
+.alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* ====================================== CAIXA DO MODAL TEMA ESCURO ====================================== */
+.alert-box {
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    background: #1e1e1e;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: aparecerModal 0.3s ease;
+}
+
+/* ====================================== ANIMAÇÃO DO MODAL ====================================== */
+@keyframes aparecerModal {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ====================================== TÍTULO DO MODAL ====================================== */
+.alert-box h3 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+/* ====================================== MENSAGEM DO MODAL ====================================== */
+.alert-box p {
+    color: #cccccc;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+/* ====================================== BOTÃO DO MODAL ====================================== */
+.alert-box button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #00ffa2, #00ff9d);
+    color: #020617;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ======================================
+   MODAL - SUCESSO E ERRO
+====================================== */
+/* ======================================
+   MODAL - TEMA CLARO
+====================================== */
+
+body.light .alert-overlay {
+    background-color: rgba(15, 23, 42, 0.45);
+}
+
+
+body.light .alert-box {
+    background: #ffffff;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+/* TÍTULO */
+
+body.light .alert-box h3 {
+    color: #0f172a;
+}
+
+
+/* MENSAGEM */
+
+body.light .alert-box p {
+    color: #475569;
+}
+
+
+/* BOTÃO PADRÃO */
+
+body.light .alert-box button {
+    background: #e2e8f0;
+
+    color: #0f172a;
+}
+
+body.light .alert-box button:hover {
+    background: #cbd5e1;
+}
+
+
+/* ======================================
+   SUCESSO - TEMA CLARO
+====================================== */
+
+body.light .alert-box.success {
+    border-color: #16a34a;
+}
+
+body.light .alert-box.success h3 {
+    color: #16a34a;
+}
+
+body.light .alert-box.success button {
+    background: #16a34a;
+
+    color: #ffffff;
+}
+
+body.light .alert-box.success button:hover {
+    background: #15803d;
+}
+
+
+/* ======================================
+   ERRO - TEMA CLARO
+====================================== */
+
+body.light .alert-box.error {
+    border-color: #dc2626;
+}
+
+body.light .alert-box.error h3 {
+    color: #dc2626;
+}
+
+body.light .alert-box.error button {
+    background: #dc2626;
+
+    color: #ffffff;
+}
+
+body.light .alert-box.error button:hover {
+    background: #b91c1c;
+}

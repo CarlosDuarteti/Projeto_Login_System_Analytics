@@ -1,0 +1,284 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Vampiro One", system-ui;
+}
+
+body{
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ffff;
+}
+
+/*======================================
+===BOTÃO PARA ALTERAR O TEMA DA PÁGINA =
+=======================================*/
+.theme-toggle-btn{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 20px;
+    right: 80px;
+    margin-top: 0;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.theme-toggle-btn:hover{
+    transform: scale(1,1);
+    background: rgba(255,255,255,0.3);
+}
+
+/*======================================
+=THEMA CLARO =
+======================================*/
+.body.light {
+    background: linear-gradient(135deg,#e0f2fe,#bae6fd,#7dd3fc);
+}
+
+.body.light .login-container {
+background: #ffffff;
+box-shadow: 0 20px 40px rgba(0, 114, 255, 0.15);
+}
+
+.login-container{
+    background: rgba(20, 20, 20, 0.95);
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.login-container h1{
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #ffff;
+}
+
+.login-container p{
+    font-size: 14px;
+    margin-bottom: 25px;
+    color: #bbbb;
+}
+
+.input-group{
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label{
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #cccc;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: #1e1e1e;
+    color: #ffff;
+    font-size: 15px;
+}
+
+.input-group input::placeholder{
+    color: #8888;
+}
+
+button{
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 114, 255, 0.5);
+}
+
+.footer{
+    margin-top: 20px;
+    font-size: 14px;
+    color: #aaaa;
+}
+
+.footer a{
+    margin-left: 5px;
+    color: #006cff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover{
+    color: #66d9ff;
+}
+
+/*======================================
+=THEMA CLARO =
+======================================*/
+body.light {
+    background: linear-gradient(135deg,#e0f2fe,#bae6fd,#7dd3fc);
+}
+
+body.light .login-container {
+background: #ffffff;
+box-shadow: 0 20px 40px rgba(0, 114, 255, 0.15);
+}
+
+/*======================================
+=ALTERANDO OS TEXTOS =
+======================================*/
+body.light .login-container h1 {
+color: #0f172a;
+}
+
+body.light .login-container p {
+color: #475569;
+}
+
+/*======================================
+=ALTERANDO OS CAMPOS =
+======================================*/
+body.light .input-group label {
+color: #334155;
+}
+
+body.light .input-group input {
+background: #f1f5f9;
+color: #0f172a;
+border: 1px solid #cbd5e1;
+}
+
+body.light .input-group input::placeholder {
+color: #94a3b8;
+}
+
+/*======================================
+=AJUSTANDO BOTAO DO TEMA CLARO =
+======================================*/
+body.light .theme-toggle-btn {
+background-color: rgba(15, 23, 42, 0.1);
+border: 1px solid rgba(15, 23, 42, 0.2);
+color: #0f172a;
+}
+
+body.light .footer {
+color: #64748b;
+}
+body.light .footer a {
+color: #0072ff;
+}
+
+.alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.alert-box{
+width: 90%;
+max-width: 400px;
+padding: 30px;
+background: #1e1e1e;
+border-radius: 15px;
+text-align: center;
+box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+animation: aparecerModal 0.3s ease;
+}
+
+@keyframes  aparecerModal{
+  from{
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to{
+    opacity: 1;
+    transform:scale(1);
+  }
+}
+
+.alert-box h3{
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 24px;
+
+}
+
+.alert-box p{
+  color: #cccccc;
+  font-size: 15px;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+.alert-box button{
+  width: 100%;
+  padding: 12px;
+  border-radius: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00ffa2, #00ff9d);
+  color: #020617;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/*====================================================
+= Alterando o modal para mudar a cor para tema claro =
+====================================================*/
+
+body.light .alert-box {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+body.light .alert-box h3 {
+    color: #0f172a;
+}
+
+body.light .alert-box p {
+    color: #475569;
+}
+
+body.light .alert-box button {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #ffffff;
+}
+
+/* ======================================
+   FONTE DO TEMA CLARO
+====================================== */
+
+body.light * {
+    font-family: "Poppins", sans-serif;
+}

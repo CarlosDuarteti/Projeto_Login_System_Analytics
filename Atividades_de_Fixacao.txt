@@ -1,0 +1,45 @@
+1. Qual é a função do register.js?
+Ele é responsável pelo comportamento da página de cadastro.
+
+2. O que faz addEventListener("submit", ...)?
+Ele adiciona um evento ao clicar no botão.
+
+3. Para que serve e.preventDefault()?
+Ele não executa o comportamento padrão do evento.
+
+4. O que o .value faz?
+Captura o valor digitado pelo usuário no input.
+
+5. Qual a função do fetch()?
+Realizar uma requisição ao HTTP.
+
+6. Por que utilizamos o método POST?
+Para enviar informações pelo http.
+
+7. Para que serve Content-Type: application/json?
+Para determinar que os dados enviados estão no formato JSON.
+
+8. Qual a função do JSON.stringify()?
+Transforma o objeto em uma string JSON.
+
+9. O que é enviado no body?
+NOME, EMAIL e senha.
+
+10. Como o backend recebe esses dados?
+Através do req.body.
+
+11. Para que serve bcrypt.hash() no backend?
+Serve para realizar a criptografia da senha.
+
+12. O que significa resposta.ok?
+Verifica se a comunicação com o HTTP foi bem sucedida.
+
+13. Para que serve resposta.json()?
+Pega a resposta do servidor e transforma em um objeto JavaScript.
+
+14. O que acontece quando o cadastro é realizado com sucesso?
+Aparece uma tela do modal informando que o usuário foi criado com sucesso.
+
+15. Qual é a diferença entre a validação feita no register.js e a validação feita no
+auth.js?
+O register.js faz uma validação antes de enviar os dados para o servidor, o auth.js faz uma validação no servidor.

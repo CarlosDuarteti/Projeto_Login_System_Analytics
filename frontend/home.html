@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Análise de Dados</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/home.js" defer></script>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <div>
+            <h1>Dashboard de Análise de Dados</h1>
+            <p>Resumo dos principais resultados do projeto</p>
+        </div>
+        <button id="btnSair" type="button">Sair</button>
+    </header>
+    <main class="container">
+        <section class="contexto">
+            <h2>Sobre o projeto</h2>
+            <p id="contextoProjeto">
+                Apresente aqui o problema investigado e o
+                objetivo da análise.
+            </p>
+        </section>
+        <section class="indicadores">
+            <article class="card">
+                <h3>Total de registros</h3>
+                <p id="totalRegistros">Carregando...</p>
+            </article>
+            <article class="card">
+                <h3>Média</h3>
+
+                7 Curso Ciências de Dados
+
+                <p id="mediaRegistros">Carregando...</p>
+            </article>
+            <article class="card">
+                <h3>Maior valor</h3>
+                <p id="maiorValor">Carregando...</p>
+            </article>
+            <article class="card">
+                <h3>Menor valor</h3>
+                <p id="menorValor">Carregando...</p>
+            </article>
+        </section>
+        <section class="grafico">
+            <h2>Distribuição dos registros</h2>
+            <canvas id="graficoPrincipal"></canvas>
+        </section>
+        <section class="insight">
+            <h2>Principal descoberta</h2>
+            <p id="bigIdea">
+                Insira aqui a Big Idea definida pela equipe.
+            </p>
+        </section>
+        <section class="conclusao">
+            <h2>Conclusão e recomendação</h2>
+            <p id="conclusaoProjeto">
+                Apresente a conclusão e a recomendação
+                fundamentadas nos resultados.
+            </p>
+        </section>
+    </main>
+</body>
+
+</html>
+
+<!-- 
+        <script src="./JS/theme.js"></script>
+        <script src="./JS/home.js"></script>
+    -->

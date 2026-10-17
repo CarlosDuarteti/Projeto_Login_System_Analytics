@@ -1,0 +1,9 @@
+Node.js -> permite usar JS fora do navegador
+npm -> Gerenciador de pacotes do Node.JS:  npm install express bcryptjs jsonwebtoken dotenv mongoose "EXPLICAÇÃO ABAIXO"
+    npm init -y -> Gera o arquivo package.json "responsável por gerar as dependências"
+    npm install express -> Cria as rotas com o servidor http
+    npm install bcryptjs -> Criptografa as senhas
+    npm install jsonwebtoken -> Gera o token da sessão para o login
+    npm install dotenv mongoose -> Realiza a conexão e o gerenciamento com o banco de dados MONGO
+Docker -> Cria o ambiente padronizado para rodar o sistema
+npm install --save-dev nodemon -> Responsável por reiniciar o servidor de forma automática, após realizar alguma alteração no código
