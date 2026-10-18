@@ -23,7 +23,9 @@ async function carregarDashboard() {
         });
 
         if (!resposta.ok) {
-            throw new Error(`Falha ao buscar JSON: HTTP ${resposta.status}`);
+            throw new Error(
+                `Falha ao buscar JSON: HTTP ${resposta.status}`
+            );
         }
 
         const dados = await resposta.json();
@@ -50,11 +52,13 @@ async function carregarDashboard() {
         }
 
         // ==========================================
-        // 2. GRÁFICO 1: CINCO CURSOS COM MAIS MATRÍCULAS
+        // 2. GRÁFICO 1: TOP 5 CURSOS
         // ==========================================
 
         const ranking = dados.rankingCursos2022a2025;
-        const canvasPrincipal = document.getElementById("graficoPrincipal");
+        const canvasPrincipal = document.getElementById(
+            "graficoPrincipal"
+        );
 
         if (
             Array.isArray(ranking) &&
@@ -93,7 +97,8 @@ async function carregarDashboard() {
                             const posicao = barra.tooltipPosition();
 
                             contexto.fillText(
-                                Number(valores[indice]).toLocaleString("pt-BR"),
+                                Number(valores[indice])
+                                    .toLocaleString("pt-BR"),
                                 posicao.x + 8,
                                 posicao.y
                             );
@@ -103,85 +108,107 @@ async function carregarDashboard() {
                     }
                 };
 
-                window.graficoPrincipal = new Chart(canvasPrincipal, {
-                    type: "bar",
+                window.graficoPrincipal = new Chart(
+                    canvasPrincipal,
+                    {
+                        type: "bar",
 
-                    data: {
-                        labels: cursos.map(item => item.curso),
+                        data: {
+                            labels: cursos.map(item => item.curso),
 
-                        datasets: [{
-                            label: "Total de matrículas",
-                            data: cursos.map(item => Number(item.matriculas)),
-                            backgroundColor: "#C9A227",
-                            borderColor: "#8C6D1F",
-                            borderWidth: 1,
-                            barPercentage: 0.70,
-                            categoryPercentage: 0.75
-                        }]
-                    },
-
-                    options: {
-                        indexAxis: "y",
-                        responsive: true,
-                        maintainAspectRatio: false,
-
-                        plugins: {
-                            legend: { display: false },
-
-                            title: {
-                                display: true,
-                                text: "Cinco cursos com mais matrículas (2022–2025)",
-                                font: { size: 16, weight: "bold" },
-                                padding: { bottom: 20 }
-                            },
-
-                            tooltip: {
-                                callbacks: {
-                                    label(context) {
-                                        return "Matrículas: " +
-                                            Number(context.raw).toLocaleString("pt-BR");
-                                    }
-                                }
-                            }
+                            datasets: [{
+                                label: "Total de matrículas",
+                                data: cursos.map(
+                                    item => Number(item.matriculas)
+                                ),
+                                backgroundColor: "#C9A227",
+                                borderColor: "#8C6D1F",
+                                borderWidth: 1,
+                                barPercentage: 0.70,
+                                categoryPercentage: 0.75
+                            }]
                         },
 
-                        scales: {
-                            x: {
-                                beginAtZero: true,
+                        options: {
+                            indexAxis: "y",
+                            responsive: true,
+                            maintainAspectRatio: false,
+
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+
                                 title: {
                                     display: true,
-                                    text: "Total de matrículas"
+                                    text: "Cinco cursos com mais matrículas (2022–2025)",
+                                    font: {
+                                        size: 16,
+                                        weight: "bold"
+                                    },
+                                    padding: {
+                                        bottom: 20
+                                    }
                                 },
-                                ticks: {
-                                    callback(valor) {
-                                        return Number(valor).toLocaleString("pt-BR");
+
+                                tooltip: {
+                                    callbacks: {
+                                        label(context) {
+                                            return "Matrículas: " +
+                                                Number(context.raw)
+                                                    .toLocaleString("pt-BR");
+                                        }
                                     }
                                 }
                             },
 
-                            y: {
-                                grid: { display: false }
+                            scales: {
+                                x: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: "Total de matrículas"
+                                    },
+                                    ticks: {
+                                        callback(valor) {
+                                            return Number(valor)
+                                                .toLocaleString("pt-BR");
+                                        }
+                                    }
+                                },
+
+                                y: {
+                                    grid: {
+                                        display: false
+                                    }
+                                }
+                            },
+
+                            layout: {
+                                padding: {
+                                    right: 55
+                                }
                             }
                         },
 
-                        layout: {
-                            padding: { right: 55 }
-                        }
-                    },
-
-                    plugins: [rotulosValores]
-                });
+                        plugins: [rotulosValores]
+                    }
+                );
             }
         } else {
-            console.warn("Ranking de cursos não encontrado no JSON.");
+            console.warn(
+                "Ranking de cursos não encontrado no JSON."
+            );
         }
 
         // ==========================================
-        // 3. GRÁFICO 2: EVOLUÇÃO DAS MATRÍCULAS POR ANO
+        // 3. GRÁFICO 2: EVOLUÇÃO ANUAL
         // ==========================================
 
         const evolucao = dados.evolucaoMatriculasPorAno;
-        const canvasEvolucao = document.getElementById("graficoEvolucao");
+        const canvasEvolucao = document.getElementById(
+            "graficoEvolucao"
+        );
 
         if (
             Array.isArray(evolucao) &&
@@ -195,7 +222,9 @@ async function carregarDashboard() {
                 )
                 .sort((a, b) => Number(a.ano) - Number(b.ano));
 
-            if (window.graficoEvolucaoMatriculas instanceof Chart) {
+            if (
+                window.graficoEvolucaoMatriculas instanceof Chart
+            ) {
                 window.graficoEvolucaoMatriculas.destroy();
             }
 
@@ -216,7 +245,8 @@ async function carregarDashboard() {
 
                         meta.data.forEach((ponto, indice) => {
                             contexto.fillText(
-                                Number(valores[indice]).toLocaleString("pt-BR"),
+                                Number(valores[indice])
+                                    .toLocaleString("pt-BR"),
                                 ponto.x,
                                 ponto.y - 10
                             );
@@ -232,7 +262,9 @@ async function carregarDashboard() {
                         type: "line",
 
                         data: {
-                            labels: dadosEvolucao.map(item => item.ano),
+                            labels: dadosEvolucao.map(
+                                item => item.ano
+                            ),
 
                             datasets: [{
                                 label: "Total de matrículas",
@@ -262,13 +294,20 @@ async function carregarDashboard() {
                             },
 
                             plugins: {
-                                legend: { display: false },
+                                legend: {
+                                    display: false
+                                },
 
                                 title: {
                                     display: true,
                                     text: "Evolução das matrículas (2022–2025)",
-                                    font: { size: 16, weight: "bold" },
-                                    padding: { bottom: 20 }
+                                    font: {
+                                        size: 16,
+                                        weight: "bold"
+                                    },
+                                    padding: {
+                                        bottom: 20
+                                    }
                                 },
 
                                 tooltip: {
@@ -315,7 +354,134 @@ async function carregarDashboard() {
             }
         } else {
             console.warn(
-                "Dados da evolução anual não encontrados ou canvas ausente."
+                "Dados da evolução anual não encontrados no JSON."
+            );
+        }
+
+        // ==========================================
+        // 4. GRÁFICO 3: HISTOGRAMA DAS MATRÍCULAS
+        // ==========================================
+
+        const distribuicao = dados.distribuicaoMatriculasTurma;
+        const canvasDistribuicao = document.getElementById(
+            "graficoDistribuicao"
+        );
+
+        if (
+            distribuicao &&
+            Array.isArray(distribuicao.faixas) &&
+            distribuicao.faixas.length > 0 &&
+            canvasDistribuicao
+        ) {
+            const faixas = distribuicao.faixas.filter(item =>
+                item.faixa != null &&
+                Number.isFinite(Number(item.frequencia))
+            );
+
+            if (
+                window.graficoDistribuicaoTurmas instanceof Chart
+            ) {
+                window.graficoDistribuicaoTurmas.destroy();
+            }
+
+            if (faixas.length > 0) {
+                window.graficoDistribuicaoTurmas = new Chart(
+                    canvasDistribuicao,
+                    {
+                        type: "bar",
+
+                        data: {
+                            labels: faixas.map(item => item.faixa),
+
+                            datasets: [{
+                                label: "Quantidade de registros de turma",
+                                data: faixas.map(
+                                    item => Number(item.frequencia)
+                                ),
+                                backgroundColor: "#C9A227",
+                                borderColor: "#8C6D1F",
+                                borderWidth: 1,
+                                barPercentage: 1,
+                                categoryPercentage: 1
+                            }]
+                        },
+
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+
+                                title: {
+                                    display: true,
+                                    text: "Distribuição das matrículas por turma",
+                                    font: {
+                                        size: 16,
+                                        weight: "bold"
+                                    },
+                                    padding: {
+                                        bottom: 20
+                                    }
+                                },
+
+                                subtitle: {
+                                    display: true,
+                                    text:
+                                        `Mínimo: ${Number(distribuicao.menorValor).toLocaleString("pt-BR")} | ` +
+                                        `Mediana: ${Number(distribuicao.mediana).toLocaleString("pt-BR")} | ` +
+                                        `Máximo: ${Number(distribuicao.maiorValor).toLocaleString("pt-BR")}`,
+                                    padding: {
+                                        bottom: 15
+                                    }
+                                },
+
+                                tooltip: {
+                                    callbacks: {
+                                        label(context) {
+                                            return "Registros de turma: " +
+                                                Number(context.raw)
+                                                    .toLocaleString("pt-BR");
+                                        }
+                                    }
+                                }
+                            },
+
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: "Faixa de matrículas por turma"
+                                    },
+                                    grid: {
+                                        display: false
+                                    }
+                                },
+
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: "Quantidade de registros"
+                                    },
+                                    ticks: {
+                                        precision: 0,
+                                        callback(valor) {
+                                            return Number(valor)
+                                                .toLocaleString("pt-BR");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                );
+            }
+        } else {
+            console.warn(
+                "Dados da distribuição de matrículas não encontrados no JSON."
             );
         }
 
@@ -327,6 +493,7 @@ async function carregarDashboard() {
 
         for (const [id] of indicadores) {
             const elemento = document.getElementById(id);
+
             if (elemento) {
                 elemento.textContent = "Indisponível";
             }
@@ -334,11 +501,17 @@ async function carregarDashboard() {
     }
 }
 
-// Carregar o dashboard após a página estar pronta
-document.addEventListener("DOMContentLoaded", carregarDashboard);
+// ==========================================
+// 5. CARREGAR O DASHBOARD
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    carregarDashboard
+);
 
 // ==========================================
-// 4. BOTÃO SAIR
+// 6. BOTÃO SAIR
 // ==========================================
 
 const btnSair = document.getElementById("btnSair");

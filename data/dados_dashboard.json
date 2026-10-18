@@ -1,48 +1,125 @@
+
 {
+  "qtdTurmaUnicas": 1908,
+  "totalVagas": 70543,
+  "totalMatriculas": 66092,
+  "taxaGeralOcupacao": 93.69,
+
+  "detalhamento": {
+    "top5Cursos": [
+      {
+        "curso": "PACOTE OFFICE",
+        "matriculas": 2594
+      },
+      {
+        "curso": "PILOTAGEM DE DRONE (VANT)",
+        "matriculas": 2577
+      },
+      {
+        "curso": "SUPERIOR DE TECNOLOGIA EM PRODUÇÃO CÊNICA",
+        "matriculas": 1673
+      },
+      {
+        "curso": "MARKETING DIGITAL",
+        "matriculas": 1570
+      },
+      {
+        "curso": "TÉCNICO DE NÍVEL MÉDIO EM MARKETING E MÍDIAS SOCIAIS",
+        "matriculas": 1568
+      }
+    ]
+  },
+
+  "rankingCursos2022a2025": [
+    {
+      "curso": "PACOTE OFFICE",
+      "matriculas": 2594
+    },
+    {
+      "curso": "PILOTAGEM DE DRONE (VANT)",
+      "matriculas": 2577
+    },
+    {
+      "curso": "SUPERIOR DE TECNOLOGIA EM PRODUÇÃO CÊNICA",
+      "matriculas": 1673
+    },
+    {
+      "curso": "MARKETING DIGITAL",
+      "matriculas": 1570
+    },
+    {
+      "curso": "TÉCNICO DE NÍVEL MÉDIO EM MARKETING E MÍDIAS SOCIAIS",
+      "matriculas": 1568
+    }
+  ],
+
+  "indicadores2022a2025": {
     "qtdTurmaUnicas": 1908,
     "totalVagas": 70543,
     "totalMatriculas": 66092,
-    "taxaGeralOcupacao": 93.69,
-    "rankingCursos2022a2025": [
-        {
-            "curso": "PACOTE OFFICE",
-            "matriculas": 2594
-        },
-        {
-            "curso": "PILOTAGEM DE DRONE (VANT)",
-            "matriculas": 2577
-        },
-        {
-            "curso": "Superior de Tecnologia em Produção Cênica",
-            "matriculas": 1673
-        },
-        {
-            "curso": "Marketing Digital",
-            "matriculas": 1570
-        },
-        {
-            "curso": "Técnico de Nível Médio em Marketing e Mídias Sociais",
-            "matriculas": 1568
-        }
-    ],
-    
-"evolucaoMatriculasPorAno": [
-    {
-        "ano": "2022",
-        "matriculas": 17154
-    },
-    {
-        "ano": "2023",
-        "matriculas": 20546
-    },
-    {
-        "ano": "2024",
-        "matriculas": 12465
-    },
-    {
-        "ano": "2025",
-        "matriculas": 15927
-    }
-]
+    "taxaGeralOcupacao": 93.69
+  },
 
+  "evolucaoMatriculasPorAno": [
+    {
+      "ano": "2022",
+      "matriculas": 17154
+    },
+    {
+      "ano": "2023",
+      "matriculas": 20546
+    },
+    {
+      "ano": "2024",
+      "matriculas": 12465
+    },
+    {
+      "ano": "2025",
+      "matriculas": 15927
+    }
+  ],
+
+  "distribuicaoMatriculasTurma": {
+    "menorValor": 0,
+    "mediana": 21,
+    "maiorValor": 80,
+    "faixas": [
+      {
+        "faixa": "0–9",
+        "frequencia": 535
+      },
+      {
+        "faixa": "10–19",
+        "frequencia": 1173
+      },
+      {
+        "faixa": "20–29",
+        "frequencia": 647
+      },
+      {
+        "faixa": "30–39",
+        "frequencia": 1100
+      },
+      {
+        "faixa": "40–49",
+        "frequencia": 109
+      },
+      {
+        "faixa": "50–59",
+        "frequencia": 41
+      },
+      {
+        "faixa": "60–69",
+        "frequencia": 9
+      },
+      {
+        "faixa": "70–79",
+        "frequencia": 1
+      },
+      {
+        "faixa": "80",
+        "frequencia": 1
+      }
+    ]
+  }
 }
