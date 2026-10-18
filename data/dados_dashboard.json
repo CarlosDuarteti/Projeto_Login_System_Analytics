@@ -24,5 +24,25 @@
             "curso": "Técnico de Nível Médio em Marketing e Mídias Sociais",
             "matriculas": 1568
         }
-    ]
+    ],
+    
+"evolucaoMatriculasPorAno": [
+    {
+        "ano": "2022",
+        "matriculas": 17154
+    },
+    {
+        "ano": "2023",
+        "matriculas": 20546
+    },
+    {
+        "ano": "2024",
+        "matriculas": 12465
+    },
+    {
+        "ano": "2025",
+        "matriculas": 15927
+    }
+]
+
 }
