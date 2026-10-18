@@ -121,8 +121,8 @@ async function carregarDashboard() {
                                 data: cursos.map(
                                     item => Number(item.matriculas)
                                 ),
-                                backgroundColor: "#C9A227",
-                                borderColor: "#8C6D1F",
+                                backgroundColor: "#1b6f2e",
+                                borderColor: "#1b6f2e",
                                 borderWidth: 1,
                                 barPercentage: 0.70,
                                 categoryPercentage: 0.75
@@ -271,12 +271,12 @@ async function carregarDashboard() {
                                 data: dadosEvolucao.map(
                                     item => Number(item.matriculas)
                                 ),
-                                borderColor: "#C9A227",
-                                backgroundColor: "#C9A227",
+                                borderColor: "#1b6f2e",
+                                backgroundColor: "#1b6f2e",
                                 borderWidth: 3,
                                 pointRadius: 6,
                                 pointHoverRadius: 8,
-                                pointBackgroundColor: "#8C6D1F",
+                                pointBackgroundColor: "#1b6f2e",
                                 tension: 0.25,
                                 fill: false
                             }]
@@ -398,8 +398,8 @@ async function carregarDashboard() {
                                 data: faixas.map(
                                     item => Number(item.frequencia)
                                 ),
-                                backgroundColor: "#C9A227",
-                                borderColor: "#8C6D1F",
+                                backgroundColor: "#1b6f2e",
+                                borderColor: "black",
                                 borderWidth: 1,
                                 barPercentage: 1,
                                 categoryPercentage: 1
