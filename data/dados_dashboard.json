@@ -2,5 +2,27 @@
     "qtdTurmaUnicas": 1908,
     "totalVagas": 70543,
     "totalMatriculas": 66092,
-    "taxaGeralOcupacao": 93.69
+    "taxaGeralOcupacao": 93.69,
+    "rankingCursos2022a2025": [
+        {
+            "curso": "PACOTE OFFICE",
+            "matriculas": 2594
+        },
+        {
+            "curso": "PILOTAGEM DE DRONE (VANT)",
+            "matriculas": 2577
+        },
+        {
+            "curso": "Superior de Tecnologia em Produção Cênica",
+            "matriculas": 1673
+        },
+        {
+            "curso": "Marketing Digital",
+            "matriculas": 1570
+        },
+        {
+            "curso": "Técnico de Nível Médio em Marketing e Mídias Sociais",
+            "matriculas": 1568
+        }
+    ]
 }

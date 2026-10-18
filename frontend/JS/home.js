@@ -1,9 +1,15 @@
 
 async function carregarDashboard() {
     const indicadores = [
-        ["qtdTurmaUnicas", (valor) => Number(valor).toLocaleString("pt-BR")],
-        ["totalVagas", (valor) => Number(valor).toLocaleString("pt-BR")],
-        ["totalMatriculas", (valor) => Number(valor).toLocaleString("pt-BR")],
+        ["qtdTurmaUnicas", (valor) =>
+            Number(valor).toLocaleString("pt-BR")],
+
+        ["totalVagas", (valor) =>
+            Number(valor).toLocaleString("pt-BR")],
+
+        ["totalMatriculas", (valor) =>
+            Number(valor).toLocaleString("pt-BR")],
+
         ["taxaGeralOcupacao", (valor) =>
             Number(valor).toLocaleString("pt-BR", {
                 minimumFractionDigits: 2,
@@ -12,21 +18,30 @@ async function carregarDashboard() {
     ];
 
     try {
+        // Carregar os indicadores e o ranking do dashboard
         const resposta = await fetch("/data/dados_dashboard.json", {
             cache: "no-store"
         });
 
         if (!resposta.ok) {
-            throw new Error(`Falha ao buscar JSON: HTTP ${resposta.status}`);
+            throw new Error(
+                `Falha ao buscar JSON: HTTP ${resposta.status}`
+            );
         }
 
         const dados = await resposta.json();
+
+        // ==================================================
+        // 1. ATUALIZAR OS CARDS DOS INDICADORES
+        // ==================================================
 
         for (const [id, formatar] of indicadores) {
             const elemento = document.getElementById(id);
 
             if (!elemento) {
-                console.warn(`Não encontrei o card com id "${id}".`);
+                console.warn(
+                    `Não encontrei o card com id "${id}".`
+                );
                 continue;
             }
 
@@ -36,186 +51,213 @@ async function carregarDashboard() {
                 !Number.isFinite(Number(dados[id]))
             ) {
                 elemento.textContent = "Indisponível";
-                console.warn(`Valor ausente ou inválido no JSON: ${id}`);
+                console.warn(
+                    `Valor ausente ou inválido no JSON: ${id}`
+                );
                 continue;
             }
 
             elemento.textContent = formatar(dados[id]);
         }
 
+        // ==================================================
+        // 2. GERAR O GRÁFICO DOS CINCO CURSOS COM MAIS MATRÍCULAS
+        // ==================================================
+
+        const ranking = dados.rankingCursos2022a2025;
+
+        if (!Array.isArray(ranking) || ranking.length === 0) {
+            console.warn(
+                "Ranking de cursos não encontrado no JSON."
+            );
+            return;
+        }
+
+        const elementoGrafico = document.getElementById(
+            "graficoPrincipal"
+        );
+
+        if (!elementoGrafico) {
+            console.warn(
+                'Não encontrei o canvas "graficoPrincipal".'
+            );
+            return;
+        }
+
+        // Validar os dados e ordenar da menor para a maior
+        // para que o maior valor apareça no topo do gráfico.
+        const cursos = ranking
+            .filter(item =>
+                item.curso != null &&
+                Number.isFinite(Number(item.matriculas))
+            )
+            .sort(
+                (a, b) =>
+                    Number(a.matriculas) - Number(b.matriculas)
+            );
+
+        if (cursos.length === 0) {
+            console.warn("Não há dados válidos para o gráfico.");
+            return;
+        }
+
+        const labels = cursos.map(item => item.curso);
+
+        const quantidades = cursos.map(
+            item => Number(item.matriculas)
+        );
+
+        // Evitar duplicar o gráfico se a função for chamada novamente
+        if (window.graficoPrincipal instanceof Chart) {
+            window.graficoPrincipal.destroy();
+        }
+
+        // Plugin para mostrar os valores ao lado das barras
+        const rotulosValores = {
+            id: "rotulosValores",
+
+            afterDatasetsDraw(chart) {
+                const contexto = chart.ctx;
+                const dataset = chart.data.datasets[0];
+                const meta = chart.getDatasetMeta(0);
+
+                contexto.save();
+                contexto.font = "bold 12px Arial";
+                contexto.fillStyle = "#333";
+                contexto.textBaseline = "middle";
+                contexto.textAlign = "left";
+
+                meta.data.forEach((barra, indice) => {
+                    const valor = dataset.data[indice];
+                    const posicao = barra.tooltipPosition();
+
+                    contexto.fillText(
+                        Number(valor).toLocaleString("pt-BR"),
+                        posicao.x + 8,
+                        posicao.y
+                    );
+                });
+
+                contexto.restore();
+            }
+        };
+
+        window.graficoPrincipal = new Chart(elementoGrafico, {
+            type: "bar",
+
+            data: {
+                labels: labels,
+
+                datasets: [{
+                    label: "Total de matrículas",
+                    data: quantidades,
+                    backgroundColor: "#C9A227",
+                    borderColor: "#8C6D1F",
+                    borderWidth: 1,
+                    barPercentage: 0.70,
+                    categoryPercentage: 0.75
+                }]
+            },
+
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                maintainAspectRatio: false,
+
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+
+                    title: {
+                        display: true,
+                        text: "Cinco cursos com mais matrículas (2022–2025)",
+                        font: {
+                            size: 16,
+                            weight: "bold"
+                        },
+                        padding: {
+                            bottom: 20
+                        }
+                    },
+
+                    tooltip: {
+                        callbacks: {
+                            label(context) {
+                                return (
+                                    "Matrículas: " +
+                                    Number(context.raw)
+                                        .toLocaleString("pt-BR")
+                                );
+                            }
+                        }
+                    }
+                },
+
+                scales: {
+                    x: {
+                        beginAtZero: true,
+
+                        title: {
+                            display: true,
+                            text: "Total de matrículas"
+                        },
+
+                        grid: {
+                            color: "rgba(0, 0, 0, 0.10)",
+                            borderDash: [5, 5]
+                        },
+
+                        ticks: {
+                            callback(valor) {
+                                return Number(valor)
+                                    .toLocaleString("pt-BR");
+                            }
+                        }
+                    },
+
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+
+                // Reservar espaço à direita para os valores
+                layout: {
+                    padding: {
+                        right: 55
+                    }
+                }
+            },
+
+            plugins: [rotulosValores]
+        });
+
     } catch (erro) {
         console.error(
-            "Não foi possível carregar os indicadores do dashboard:",
+            "Não foi possível carregar os dados do dashboard:",
             erro
         );
 
         for (const [id] of indicadores) {
             const elemento = document.getElementById(id);
-            if (elemento) elemento.textContent = "Indisponível";
+            if (elemento) {
+                elemento.textContent = "Indisponível";
+            }
         }
     }
 }
 
-// ========================================
-// GRÁFICO 1 — CINCO CURSOS COM MAIS MATRÍCULAS
-// Período: 2022–2025
-// ========================================
+// Carregar o dashboard após a página estar pronta
+document.addEventListener(
+    "DOMContentLoaded",
+    carregarDashboard
+);
 
-function criarGraficoCursos() {
-    const canvas = document.getElementById("graficoPrincipal");
-
-    if (!canvas) {
-        console.warn('Canvas "graficoPrincipal" não encontrado.');
-        return;
-    }
-
-    if (typeof Chart === "undefined") {
-        console.error("Chart.js não foi carregado.");
-        return;
-    }
-
-    const cursos = [
-        "PACOTE OFFICE",
-        "PILOTAGEM DE DRONE (VANT)",
-        "Superior de Tecnologia em Produção Cênica",
-        "Marketing Digital",
-        "Técnico de Nível Médio em Marketing e Mídias Sociais"
-    ];
-
-    const matriculas = [2594, 2577, 1673, 1570, 1568];
-
-    // Destrói o gráfico anterior caso a função seja executada novamente.
-    if (Chart.getChart(canvas)) {
-        Chart.getChart(canvas).destroy();
-    }
-
-    new Chart(canvas, {
-        type: "bar",
-
-        data: {
-            labels: cursos,
-            datasets: [{
-                label: "Total de matrículas",
-                data: matriculas,
-                backgroundColor: [
-                    "#2563eb",
-                    "#3b82f6",
-                    "#60a5fa",
-                    "#93c5fd",
-                    "#bfdbfe"
-                ],
-                borderColor: "#1d4ed8",
-                borderWidth: 1,
-                borderRadius: 5,
-                barPercentage: 0.72,
-                categoryPercentage: 0.8
-            }]
-        },
-
-        options: {
-            indexAxis: "y",
-            responsive: true,
-            maintainAspectRatio: false,
-
-            plugins: {
-                legend: {
-                    display: false
-                },
-
-                title: {
-                    display: true,
-                    text: "Cinco cursos com mais matrículas (2022–2025)",
-                    font: {
-                        size: 16
-                    },
-                    padding: {
-                        bottom: 20
-                    }
-                },
-
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return " Matrículas: " +
-                                context.parsed.x.toLocaleString("pt-BR");
-                        }
-                    }
-                }
-            },
-
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    max: 2900,
-                    title: {
-                        display: true,
-                        text: "Total de matrículas"
-                    },
-                    ticks: {
-                        callback: function(valor) {
-                            return Number(valor).toLocaleString("pt-BR");
-                        }
-                    },
-                    grid: {
-                        color: "rgba(0, 0, 0, 0.08)"
-                    }
-                },
-
-                y: {
-                    ticks: {
-                        autoSkip: false,
-                        font: {
-                            size: 11
-                        }
-                    },
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        },
-
-        plugins: [{
-            id: "valoresNasBarras",
-
-            afterDatasetsDraw(chart) {
-                const { ctx } = chart;
-                const dataset = chart.data.datasets[0];
-
-                ctx.save();
-                ctx.font = "bold 12px Arial";
-                ctx.fillStyle = "#222";
-                ctx.textAlign = "left";
-                ctx.textBaseline = "middle";
-
-                chart.getDatasetMeta(0).data.forEach((barra, indice) => {
-                    const valor = dataset.data[indice];
-
-                    ctx.fillText(
-                        Number(valor).toLocaleString("pt-BR"),
-                        barra.x + 7,
-                        barra.y
-                    );
-                });
-
-                ctx.restore();
-            }
-        }]
-    });
-}
-
-// ========================================
-// INICIALIZAÇÃO DA PÁGINA
-// ========================================
-
-document.addEventListener("DOMContentLoaded", async () => {
-    await carregarDashboard();
-    criarGraficoCursos();
-});
-
-// ========================================
-// BOTÃO SAIR
-// ========================================
+// ======================================================
+// 3. BOTÃO SAIR
+// ======================================================
 
 const btnSair = document.getElementById("btnSair");
 
