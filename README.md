@@ -1,5 +1,14 @@
 # Login System
 
+
+## Autor
+
+**Carlos Henrique Duarte**
+
+**Curso Técnico em Ciências de Dados**  
+**Escola do Futuro Paulo Renato de Souza**  
+**Professor: Heraclides Mourão**
+
 ## Sobre o projeto
 
 O **Login System** é uma aplicação web desenvolvida para demonstrar um sistema de cadastro e autenticação de usuários.
@@ -507,16 +516,6 @@ O servidor da aplicação é executado localmente na porta:
 ```text
 3001
 ```
-
----
-
-## Autor
-
-**Carlos Henrique Duarte**
-
-**Curso Técnico em Ciências de Dados**  
-**Escola do Futuro Paulo Renato de Souza**  
-**Professor: Heraclides Mourão**
 
 ---
 
