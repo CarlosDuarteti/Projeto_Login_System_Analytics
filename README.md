@@ -12,6 +12,142 @@ A aplicação também possui **tema claro e escuro**, sistema de notificações 
 
 ---
 
+## Análise de dados — Login System Analytics
+
+Além do sistema de cadastro e autenticação descrito neste README, o repositório contém a etapa de análise de dados do projeto **Login System Analytics**, que utiliza dados públicos sobre turmas das Escolas do Futuro de Goiás. As seções abaixo documentam essa parte do projeto sem remover as informações e instruções originais do sistema de login.
+
+### 1. Apresentação
+
+O projeto reúne uma aplicação web de login/cadastro e uma análise exploratória de dados educacionais. A análise organiza informações sobre turmas, vagas e matrículas das Escolas do Futuro de Goiás e apresenta indicadores que podem ser consultados em um dashboard. O objetivo é transformar uma base tabular em informações mais claras para acompanhamento e planejamento.
+
+### 2. Problema investigado
+
+A oferta de turmas, vagas e matrículas não está facilmente organizada para comparação entre escolas, cursos, categorias e anos. O projeto investiga como esses registros se distribuem e como variam ao longo do tempo, destacando diferenças que merecem ser examinadas com mais contexto.
+
+**Pergunta principal:** Como as turmas, as vagas e as matrículas dos cursos das Escolas do Futuro de Goiás estão distribuídas entre escolas, categorias e cursos, e como essa distribuição varia ao longo do tempo?
+
+### 3. Objetivos
+
+**Objetivo geral**
+
+Analisar os registros de turmas das Escolas do Futuro de Goiás e apresentar os principais indicadores em gráficos e em um dashboard de fácil consulta.
+
+**Objetivos específicos**
+
+- Coletar e organizar os dados públicos disponibilizados em arquivos CSV.
+- Verificar a estrutura da base, os tipos de dados, valores ausentes e possíveis duplicidades.
+- Padronizar campos e preparar uma base tratada para análise.
+- Comparar vagas e matrículas por escola, curso, categoria e modalidade.
+- Analisar a evolução anual das matrículas no período definido para o estudo.
+- Criar gráficos e indicadores para comunicar os resultados.
+- Registrar as limitações da base e evitar conclusões que os dados não permitem sustentar.
+
+### 4. Fonte dos dados
+
+- **Instituição responsável:** Secretaria de Estado de Ciência, Tecnologia e Inovação de Goiás (SECTI-GO), por meio do Portal de Dados Abertos do Estado de Goiás.
+- **Base:** Turmas das Escolas do Futuro — SECTI, com dados provenientes do Sistema de Gerenciamento Acadêmico das Escolas do Futuro (SIGA).
+- **Link:** https://dadosabertos.go.gov.br/dataset/turmas-escolas-do-futuro
+- **Período analisado no dashboard:** 2022 a 2025.
+- **Formato:** arquivos CSV, separados por ponto e vírgula (`;`).
+- **Arquivos do projeto:** `data/dados_original.csv` e `data/dados_tratados.csv`.
+
+A página oficial da base pode receber atualizações. Os resultados descritos neste README correspondem ao recorte e aos arquivos usados nesta versão do projeto, não necessariamente à versão mais recente publicada pelo portal.
+
+### 5. Tecnologias utilizadas
+
+**Análise de dados**
+
+- **Python:** linguagem utilizada nos notebooks de análise.
+- **Pandas:** leitura, organização, tratamento, agrupamento e cálculo de indicadores.
+- **Matplotlib:** criação de visualizações gráficas.
+- **Jupyter Notebook:** documentação e execução das etapas analíticas.
+- **CSV e JSON:** armazenamento dos dados tratados e dos dados preparados para o dashboard.
+
+**Aplicação web**
+
+- **HTML5 e CSS3:** estrutura e aparência das páginas.
+- **JavaScript:** validações e interações no navegador.
+- **Node.js e Express:** servidor e API.
+- **bcryptjs:** geração e verificação de hashes de senhas.
+- **JSON Web Token (JWT):** token retornado após o login.
+- **fs-extra:** leitura e gravação do arquivo JSON de usuários.
+
+### 6. Etapas da análise
+
+1. **Coleta:** obtenção da base pública de turmas das Escolas do Futuro de Goiás.
+2. **Diagnóstico:** inspeção das colunas, formatos, tipos de dados, valores ausentes e possíveis duplicidades.
+3. **Tratamento:** padronização de campos, conversão de datas e valores numéricos e geração do arquivo tratado.
+4. **Análise exploratória:** cálculo de totais, médias, medianas, distribuição e agrupamentos por escola, curso, modalidade e ano.
+5. **Visualização:** elaboração de gráficos para facilitar a comparação dos indicadores.
+6. **Comunicação:** seleção dos principais insights e organização da mensagem central (Big Idea) para orientar a leitura do dashboard.
+
+Os notebooks relacionados estão na pasta `analysis/`. Materiais complementares, registros das etapas e documentos de storytelling estão na pasta `docs/`.
+
+### 7. Principais descobertas
+
+No recorte de 2022 a 2025 documentado nos materiais de storytelling, os principais resultados são:
+
+- Foram considerados **3.125 registros** e identificadas **1.908 turmas únicas**.
+- Foram registradas **70.543 vagas** e **66.092 matrículas**, correspondendo a uma taxa agregada de ocupação de **93,69%**.
+- Entre os cursos destacados, **Pacote Office** somou **2.594 matrículas** e **Pilotagem de Drone (VANT)** somou **2.577**.
+- A escola **EM ARTES BASILEU FRANÇA** registrou **30.177 matrículas**, enquanto **LUIZ RASSI** registrou **10.322** no recorte consolidado descrito na narrativa do projeto.
+- As matrículas registradas por ano foram: **17.154 em 2022**, **20.546 em 2023**, **12.465 em 2024** e **15.927 em 2025**. O total de 2025 ficou 7,15% abaixo de 2022, embora tenha crescido 27,77% em relação a 2024.
+- A mediana de matrículas por registro de turma foi **21**, com valores entre **0 e 80**.
+
+Esses números descrevem os registros analisados. As diferenças observadas não demonstram, por si só, as causas da concentração ou das variações anuais. Para interpretar os resultados, é necessário considerar o contexto de cada escola, curso e período.
+
+### 8. Big Idea
+
+**A ocupação geral das vagas é elevada, mas as matrículas não se distribuem igualmente entre cursos e escolas; por isso, o planejamento deve considerar o volume geral, as diferenças entre unidades e a evolução anual, investigando os motivos antes de decidir mudanças.**
+
+O dashboard deve ser usado como instrumento inicial de acompanhamento e discussão, ajudando a identificar perguntas e pontos que merecem investigação adicional — não como prova isolada de demanda ou de necessidade de recursos.
+
+### 9. Como executar
+
+#### Executar a aplicação web
+
+É necessário ter uma versão compatível do **Node.js** e o **npm** instalados.
+
+1. Baixe ou clone o repositório.
+2. Abra um terminal na pasta raiz do projeto.
+3. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+4. Inicie o servidor:
+
+   ```bash
+   npm start
+   ```
+
+5. Acesse `http://localhost:3001` no navegador.
+
+O servidor serve os arquivos do front-end, disponibiliza as rotas de autenticação em `/api` e expõe o arquivo de dados do dashboard em `/data/dados_dashboard.json`.
+
+#### Executar os notebooks de análise
+
+1. Abra a pasta `analysis/` no Jupyter Notebook ou envie os notebooks para o Google Colab.
+2. Disponibilize os arquivos CSV necessários no ambiente de execução.
+3. Execute as células dos notebooks na ordem apresentada.
+4. Confira os caminhos dos arquivos usados nas células e ajuste-os se estiver executando fora da estrutura original do projeto.
+
+Os arquivos `data/dados_original.csv` e `data/dados_tratados.csv` são cópias de referência incluídas no repositório. Para reproduzir exatamente os resultados, utilize os arquivos e o recorte temporal correspondentes à análise documentada.
+
+### 10. Limitações
+
+- A base representa os registros disponíveis e não inclui todas as informações necessárias para explicar as diferenças entre escolas, cursos e anos.
+- Não há, nesse conjunto, dados populacionais, demanda potencial, capacidade física das unidades, divulgação dos cursos ou critérios de abertura que permitam explicar os resultados.
+- Nos arquivos de referência analisados, foram identificados **502 valores ausentes** em `data_fim` e **502** em `matriculas_aptas`, além de **10** em `carga_horaria` na base completa. Valores ausentes não devem ser interpretados automaticamente como ausência de matrículas.
+- A taxa agregada de ocupação é calculada pela relação entre matrículas e vagas; alguns registros ou cursos podem ultrapassar 100% e precisam ser conferidos individualmente.
+- Totais de matrículas não equivalem necessariamente à quantidade de pessoas únicas, pois uma pessoa pode estar associada a mais de uma turma.
+- A análise descreve padrões e diferenças, mas não comprova relações de causa e efeito.
+- O recorte apresentado no dashboard vai de 2022 a 2025 e não deve ser interpretado como uma análise completa de 2026.
+- A aplicação web é um projeto acadêmico/demonstrativo. O armazenamento de usuários em arquivo JSON e a configuração atual do JWT não devem ser considerados suficientes para uso em produção sem revisão de segurança e configuração de segredos por variáveis de ambiente.
+
+---
+
 ## Funcionalidades
 
 - Cadastro de usuários
